@@ -9,10 +9,19 @@ const getUser = async (id) => {
   return data.data;
 };
 
-const getUser2 = async (id) => {
+const getPosts = async () => {
   const data = await axios({
     method: "get",
-    url: `https://jsonplaceholder.typicode.com/users/${id}`,
+    url: `https://jsonplaceholder.typicode.com/posts/`,
+  });
+
+  return data.data;
+};
+
+const getDogs = async () => {
+  const data = await axios({
+    method: "get",
+    url: `https://dog.ceo/api/breeds/image/random`,
   });
 
   return data.data;
@@ -22,13 +31,12 @@ const UserInfo = async ({ params }) => {
   const { userId } = params;
 
   const user = await getUser(userId);
-  const user2 = await getUser2(+userId++);
+  const posts = await getPosts();
+  const dogs = await getDogs();
 
   return (
     <div className="text-center">
       <h1>UserInfo</h1>
-
-      <h1>{user.name}</h1>
     </div>
   );
 };
